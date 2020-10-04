@@ -1,6 +1,6 @@
 extends Sprite
 
-onready var winAreaSpot = get_parent().get_node("ParallaxBackground/ParallaxLayer2/WinAreaSpot")
+onready var winAreaSpot = get_parent().get_node("Background/ParallaxLayer2/WinAreaSpot")
 
 func _ready():
 	pass

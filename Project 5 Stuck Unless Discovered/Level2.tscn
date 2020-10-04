@@ -1,26 +1,25 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://MovingObstacle.tscn" type="PackedScene" id=2]
 [ext_resource path="res://PlayerGroud.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Level1BG.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Main.gd" type="Script" id=5]
-[ext_resource path="res://MovingBG.gd" type="Script" id=6]
+[ext_resource path="res://Level2BG.tscn" type="PackedScene" id=4]
+[ext_resource path="res://WinAreaReal2.gd" type="Script" id=5]
 [ext_resource path="res://WinAreaReal.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Level2.tscn" type="PackedScene" id=8]
 
-[node name="Level1" type="Node2D"]
+[node name="Level2" type="Node2D"]
 position = Vector2( -25, 37 )
-script = ExtResource( 5 )
-next_Scene = ExtResource( 8 )
 
 [node name="MovingBG" type="Node2D" parent="."]
-script = ExtResource( 6 )
 
 [node name="WinAreaReal" parent="MovingBG" instance=ExtResource( 7 )]
 position = Vector2( 161, 107 )
+script = ExtResource( 5 )
 
-[node name="Background" parent="MovingBG" instance=ExtResource( 4 )]
+[node name="Level2BG" parent="MovingBG" instance=ExtResource( 4 )]
+
+[node name="WinAreaSpot" parent="MovingBG/Level2BG/ParallaxLayer2" index="0"]
+position = Vector2( -1024, 32 )
 
 [node name="Character" parent="." instance=ExtResource( 1 )]
 position = Vector2( 537, 451 )
@@ -33,15 +32,12 @@ position = Vector2( -424, 472 )
 
 [node name="StaticBody2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 65, 75 )
-
-[node name="NextLevelTimer" type="Timer" parent="."]
 [connection signal="body_entered" from="MovingBG/WinAreaReal/WinArea" to="Character" method="_on_WinArea_body_entered"]
 [connection signal="body_exited" from="MovingBG/WinAreaReal/WinArea" to="Character" method="_on_WinArea_body_exited"]
-[connection signal="characterDied" from="Character" to="." method="_on_Character_characterDied"]
-[connection signal="wonTheLevel" from="Character" to="." method="_on_Character_wonTheLevel"]
 [connection signal="body_entered" from="MovingObstacle/MovingBox/Area2D" to="Character" method="_on_Area2D_body_entered"]
-[connection signal="timeout" from="NextLevelTimer" to="." method="_on_NextLevelTimer_timeout"]
 
 [editable path="MovingBG/WinAreaReal"]
+
+[editable path="MovingBG/Level2BG"]
 
 [editable path="MovingObstacle"]
