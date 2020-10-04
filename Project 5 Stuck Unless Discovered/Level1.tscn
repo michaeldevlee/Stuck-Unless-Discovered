@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Character.tscn" type="PackedScene" id=1]
+[ext_resource path="res://MovingObstacle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://PlayerGroud.tscn" type="PackedScene" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://ParallaxLayer.gd" type="Script" id=5]
+[ext_resource path="res://ParallaxLayer2.gd" type="Script" id=6]
+[ext_resource path="res://WinAreaReal.tscn" type="PackedScene" id=7]
+
+[node name="Level1" type="Node2D"]
+position = Vector2( -25, 37 )
+
+[node name="MovingBG" type="Node2D" parent="."]
+
+[node name="WinAreaReal" parent="MovingBG" instance=ExtResource( 7 )]
+position = Vector2( 161, 107 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="MovingBG"]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="MovingBG/ParallaxBackground"]
+motion_mirroring = Vector2( 3072, 0 )
+script = ExtResource( 5 )
+
+[node name="BG1" type="Sprite" parent="MovingBG/ParallaxBackground/ParallaxLayer"]
+position = Vector2( -1024, -3.8147e-06 )
+scale = Vector2( 16, 9.375 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="BG2" type="Sprite" parent="MovingBG/ParallaxBackground/ParallaxLayer"]
+position = Vector2( -5.91278e-05, 0 )
+scale = Vector2( 16, 9.375 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="BG3" type="Sprite" parent="MovingBG/ParallaxBackground/ParallaxLayer"]
+position = Vector2( 1024, 0 )
+scale = Vector2( 16, 9.375 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="MovingBG/ParallaxBackground"]
+motion_mirroring = Vector2( 3072, 0 )
+script = ExtResource( 6 )
+
+[node name="WinAreaSpot" type="Sprite" parent="MovingBG/ParallaxBackground/ParallaxLayer2"]
+position = Vector2( -992, 32 )
+texture = ExtResource( 4 )
+
+[node name="Character" parent="." instance=ExtResource( 1 )]
+position = Vector2( 537, 451 )
+
+[node name="MovingObstacle" parent="." instance=ExtResource( 2 )]
+position = Vector2( -207, -61 )
+
+[node name="MovingBox" parent="MovingObstacle" index="0"]
+position = Vector2( -424, 472 )
+
+[node name="StaticBody2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 65, 75 )
+[connection signal="body_entered" from="MovingBG/WinAreaReal/WinArea" to="Character" method="_on_WinArea_body_entered"]
+[connection signal="body_exited" from="MovingBG/WinAreaReal/WinArea" to="Character" method="_on_WinArea_body_exited"]
+[connection signal="body_entered" from="MovingObstacle/MovingBox/Area2D" to="Character" method="_on_Area2D_body_entered"]
+
+[editable path="MovingBG/WinAreaReal"]
+
+[editable path="MovingObstacle"]

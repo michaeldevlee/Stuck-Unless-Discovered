@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://MovingObstacle.gd" type="Script" id=2]
+[ext_resource path="res://StartPoint.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 28.366, 26.463 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 32.2473, 34.0646 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 27.8694, 34.6021 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 20.3312, 36.9806 )
+
+[node name="MovingObstacle" type="Node2D"]
+
+[node name="MovingBox" type="KinematicBody2D" parent="."]
+position = Vector2( 1072, 476.872 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="MovingBox"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingBox"]
+position = Vector2( 34.487, 32.1086 )
+shape = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="MovingBox"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovingBox/Area2D"]
+position = Vector2( 30.9194, 29.7301 )
+shape = SubResource( 2 )
+
+[node name="StartPoint" type="Node2D" parent="."]
+position = Vector2( 1484.13, 506.602 )
+
+[node name="Area2D" type="Area2D" parent="StartPoint"]
+script = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartPoint/Area2D"]
+shape = SubResource( 3 )
+
+[node name="EndPoint" type="Node2D" parent="."]
+position = Vector2( -492.331, 508.981 )
+
+[node name="Area2D" type="Area2D" parent="EndPoint"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndPoint/Area2D"]
+position = Vector2( 12.3312, 0 )
+shape = SubResource( 4 )
+[connection signal="body_entered" from="EndPoint/Area2D" to="MovingBox" method="_on_Area2D_body_entered"]
