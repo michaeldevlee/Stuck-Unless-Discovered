@@ -35,6 +35,44 @@ position = Vector2( -424, 472 )
 position = Vector2( 65, 75 )
 
 [node name="NextLevelTimer" type="Timer" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+margin_left = 49.9467
+margin_top = -25.5679
+margin_right = 199.947
+margin_bottom = -7.56795
+rect_scale = Vector2( 2, 2 )
+visible_characters = 33
+tab_size = 0
+text = "SPACEBAR TO JUMP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+margin_left = 334.238
+margin_top = -28.2426
+margin_right = 484.238
+margin_bottom = -10.2426
+rect_scale = Vector2( 2, 2 )
+tab_size = 0
+text = "DODGE BLUE BOXES"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+margin_left = 661.0
+margin_top = -26.0
+margin_right = 868.0
+margin_bottom = 8.0
+rect_scale = Vector2( 2, 2 )
+tab_size = 0
+text = "FIND THE END OF THE LOOP
+THEN PRESS DOWN ARROW"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="body_entered" from="MovingBG/WinAreaReal/WinArea" to="Character" method="_on_WinArea_body_entered"]
 [connection signal="body_exited" from="MovingBG/WinAreaReal/WinArea" to="Character" method="_on_WinArea_body_exited"]
 [connection signal="characterDied" from="Character" to="." method="_on_Character_characterDied"]

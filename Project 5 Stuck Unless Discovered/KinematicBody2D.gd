@@ -6,10 +6,12 @@ var velocity = Vector2()
 export var jumpForce = 4
 export var gravity = 500
 var canWin = false
+onready var anim = $AnimationPlayer
 signal wonTheLevel
 signal characterDied
 
 func _ready():
+	anim.play("Running")
 	pass 
 
 func _process(delta):
